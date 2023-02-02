@@ -39,7 +39,7 @@ Create `users.json` in `data` folder with `[]` content.
 ```js
 // data/users.json
 
-[];
+[]
 ```
 
 ```ts
