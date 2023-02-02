@@ -132,3 +132,27 @@ new JsonDB(store);
 
 ...
 ```
+
+## Change unique id generator
+
+JsonDB uses `uuid` package for generating unique ids. If you want to change this to something else, you can use this example:
+
+```ts
+// src/index.ts
+
+import { randomBytes } from 'crypto';
+import { JsonDB, Store } from '@burakbey/jsondb';
+
+const store = new Store({
+    mainPath: 'somePathHere',
+    getId() {
+        const ms = new Date().getTime().toString();
+        const id = crypto.randomBytes(8).toString('hex');
+
+        return `${ms}-${id}`;
+    }
+});
+new JsonDB(store);
+
+...
+```
