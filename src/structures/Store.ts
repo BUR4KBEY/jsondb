@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 import Collection from './Collection';
 import Item from './Item';
@@ -25,5 +26,9 @@ export default class Store {
     save(collection: Collection<Item<unknown>>) {
         const dataStr = JSON.stringify(collection.items, null, 4);
         writeFileSync(join(this.mainPath, `${collection.name}.json`), dataStr);
+    }
+
+    getId(): string {
+        return uuidv4();
     }
 }
