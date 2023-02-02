@@ -99,3 +99,36 @@ if (user) {
     UserCollection.delete(user);
 }
 ```
+
+## Usage for FiveM
+
+Create `data` folder on root path.
+
+```ts
+// server/index.ts
+
+import { JsonDB, Store } from '@burakbey/jsondb';
+
+const store = new Store({
+    mainPath: 'data',
+    fetch(collection) {
+        const dataStr = LoadResourceFile(
+            GetCurrentResourceName(),
+            `${this.mainPath}/${collection.name}.json`
+        );
+        const data = JSON.parse(dataStr);
+        return data;
+    },
+    save(collection) {
+        SaveResourceFile(
+            GetCurrentResourceName(),
+            `${this.mainPath}/${collection.name}.json`,
+            JSON.stringify(collection.items, null, 4),
+            -1
+        );
+    }
+});
+new JsonDB(store);
+
+...
+```
