@@ -36,7 +36,7 @@ new JsonDB(store);
 
 Create `users.json` in `data` folder with `[]` content.
 
-```js
+```json
 // data/users.json
 
 []
@@ -88,10 +88,14 @@ const user = UserCollection.findOne(x => x.username === 'user');
 
 // Update user
 const user = UserCollection.findOne(x => x.username === 'user');
-user.username = 'user-updated';
-UserCollection.update(user);
+if (user) {
+    user.username = 'user-updated';
+    UserCollection.update(user);
+}
 
 // Delete user
 const user = UserCollection.findOne(x => x.username === 'user-updated');
-UserCollection.delete(user);
+if (user) {
+    UserCollection.delete(user);
+}
 ```
