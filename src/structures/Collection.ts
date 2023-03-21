@@ -35,7 +35,7 @@ export default class Collection<T extends Item<unknown>> {
         const index = this.items.findIndex(x => x._id === item._id);
 
         if (index !== -1) {
-            this.items.splice(this.items.indexOf(item), 1);
+            this.items.splice(index, 1);
             JsonDB.getInstance().store.save(this);
         }
     }
